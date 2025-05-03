@@ -1,6 +1,6 @@
 #include "../MAPhonebook.hpp"
 
-bool	Contact::set_first_name(std::string *str, int checker)
+bool	Contact::set_first_name(std::string *str, int checker) //////////digit
 {
 	first_name_ = *str;
 	if (!str || first_name_.length() < 2)
@@ -12,7 +12,7 @@ bool	Contact::set_first_name(std::string *str, int checker)
 	return true;
 }
 
-bool	Contact::set_last_name(std::string *str, int checker)
+bool	Contact::set_last_name(std::string *str, int checker) ///////digit
 {
 	last_name_ = *str;
 	if (!str || last_name_.length() < 2)
