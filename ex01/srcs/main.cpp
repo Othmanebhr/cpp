@@ -11,6 +11,8 @@ static void	first_aff(void)
 void	get_input(std::string *input)
 {
 	std::getline(std::cin, *input);
+	if (*input == "EXIT")
+		exit(0);
 }
 
 int	main(int ac, char **av)
@@ -23,17 +25,21 @@ int	main(int ac, char **av)
 		std::cout << "Wrong nb of args, please use only executable file." << std::endl;
 		return 1;
 	}
+	system("clear");
 	phone.set_idx();
 	first_aff();
+	std::cout << std::endl;
 	while (true)
 	{
+		std::cout << "Please choose an option: (ADD, SEARCH, EXIT)" << std::endl;
 		get_input(&input);
-		if (input == "EXIT")
-			break;
-		else if (input == "ADD")
+		if (input == "ADD")
+		{
+			system("clear");
 			add_contact(&phone, &input);
-		// else if (input == "SEARCH")
-		// 	search_contact(&phone, input);
+		}
+		else if (input == "SEARCH")
+			search_contact(&phone, &input);
 	}
 	return 0;
 }

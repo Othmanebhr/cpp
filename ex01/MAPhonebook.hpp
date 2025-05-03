@@ -3,6 +3,7 @@
 
 #include <cctype>
 #include <iostream>
+#include <iomanip>
 
 class Contact
 {
@@ -11,19 +12,24 @@ class Contact
 	std::string	first_name_;
 	std::string	last_name_;
 	std::string	nickname_;
-	int			phone_number_;
+	std::string	phone_number_;
 
 	public:
-	bool	set_first_name(char *str);
-	bool	set_last_name(char *str);
-	bool	set_nickname(char *str);
-	bool	set_phone_number(char *str);
+	bool		set_first_name(std::string *str, int checker);
+	bool		set_last_name(std::string *str, int checker);
+	bool		set_nickname(std::string *str, int checker);
+	bool		set_phone_number(std::string *str, int checker);
+	bool		set_secret(std::string *str, int checker);
+	std::string	get_first_name(void);
+	std::string	get_last_name(void);
+	std::string	get_nickname(void);
+	std::string	get_phone(void);
 };
 
 class Phonebook
 {
 	private:
-	int			idx_;
+	int		idx_;
 	
 	public:
 	Contact		Contact_[8];
@@ -35,5 +41,7 @@ class Phonebook
 void	get_input(std::string *input);
 
 void	add_contact(Phonebook *phone, std::string *input);
+
+void	search_contact(Phonebook *phone, std::string *input);
 
 #endif
