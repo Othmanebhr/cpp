@@ -1,8 +1,8 @@
 NAME = megaphone
-SRC = /home/obouhour/ex/cpp_0/ex00/srcs/main.cpp
-OBJ = $(SRC:.cpp=.o)
+SRC = main.cpp
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
 

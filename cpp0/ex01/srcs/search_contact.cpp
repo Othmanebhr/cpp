@@ -22,7 +22,7 @@ static void print_full_contact(Phonebook *phone)
 	std::cout << "---------------------------------------------" << std::endl;
 	std::cout << "|  INDEX   |FIRST_NAME| LAST_NAME| NICKNAME |" << std::endl;
 	std::cout << "---------------------------------------------" << std::endl;
-	for (size_t i = 0; i < phone->get_idx() || (phone->count == 1 && i < 8); i++)
+	for (int i = 0; i < phone->get_idx() || (phone->count == 1 && i < 8); i++)
 	{
 		print_line(i, phone->Contact_[i]);
 	}
@@ -40,7 +40,7 @@ void search_contact(Phonebook *phone, std::string *input)
 		get_input(input);
 		check = *input;
 		int		checker = 0;
-		for (int i = 0; i < check.length(); i++)
+		for (size_t i = 0; i < check.length(); i++)
 		{
 			if (!std::isdigit(check[i]))
 			{
@@ -52,6 +52,8 @@ void search_contact(Phonebook *phone, std::string *input)
 		if (checker == 1)
 			continue ;
 		i_idx = atoi(check.c_str()) - 1;
+		if (phone->count == 1 && (i_idx >= 1 && i_idx <= 8))
+			break ;
 		if (i_idx >= 0 && i_idx <= phone->get_idx() - 1)
 			break;
 		else 

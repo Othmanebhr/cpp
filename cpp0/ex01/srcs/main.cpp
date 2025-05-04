@@ -10,7 +10,12 @@ static void	first_aff(void)
 
 void	get_input(std::string *input)
 {
-	std::getline(std::cin, *input);
+	if (!std::getline(std::cin, *input))
+	{
+		system("clear");
+		std::cout << "Fermeture du programme (EOF détecté)." << std::endl;
+		exit(0);
+	}
 	if (*input == "EXIT")
 	{
 		system("clear");
@@ -22,6 +27,7 @@ int	main(int ac, char **av)
 {
 	Phonebook	phone;
 	std::string	input;
+	(void)av;
 
 	if (ac != 1)
 	{
@@ -29,6 +35,7 @@ int	main(int ac, char **av)
 		return 1;
 	}
 	system("clear");
+
 	phone.set_idx();
 	phone.count = 0;
 	first_aff();
@@ -43,7 +50,12 @@ int	main(int ac, char **av)
 			add_contact(&phone, &input);
 		}
 		else if (input == "SEARCH")
-			search_contact(&phone, &input);
+		{
+			if (phone.get_idx() == 0 && phone.count == 0)
+				std::cout << "Aucun contact ajoute!" << std::endl;
+			else
+				search_contact(&phone, &input);
+		}
 	}
 	system("clear");
 	return 0;
