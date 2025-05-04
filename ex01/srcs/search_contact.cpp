@@ -10,7 +10,7 @@ static std::string format_field(const std::string& str)
 
 static void print_line(size_t idx, Contact ctc)
 {
-	std::cout << "|" << std::setw(10) << idx
+	std::cout << "|" << std::setw(10) << idx + 1
 			<< "|" << format_field(ctc.get_first_name())
 			<< "|" << format_field(ctc.get_last_name())
 			<< "|" << format_field(ctc.get_nickname())
@@ -22,7 +22,7 @@ static void print_full_contact(Phonebook *phone)
 	std::cout << "---------------------------------------------" << std::endl;
 	std::cout << "|  INDEX   |FIRST_NAME| LAST_NAME| NICKNAME |" << std::endl;
 	std::cout << "---------------------------------------------" << std::endl;
-	for (size_t i = 0; i < phone->get_idx(); i++)
+	for (size_t i = 0; i < phone->get_idx() || (phone->count == 1 && i < 8); i++)
 	{
 		print_line(i, phone->Contact_[i]);
 	}
@@ -51,8 +51,8 @@ void search_contact(Phonebook *phone, std::string *input)
 		}
 		if (checker == 1)
 			continue ;
-		i_idx = stoi(check);
-		if ((i_idx >= 0 && i_idx <= 8) && i_idx <= phone->get_idx())
+		i_idx = atoi(check.c_str()) - 1;
+		if (i_idx >= 0 && i_idx <= phone->get_idx() - 1)
 			break;
 		else 
 			std::cout << "Please use only digits and a valid input:" << std::endl;
@@ -63,4 +63,6 @@ void search_contact(Phonebook *phone, std::string *input)
 	std::cout << "Last name: " << phone->Contact_[i_idx].get_last_name() << std::endl;
 	std::cout << "Nickname: " << phone->Contact_[i_idx].get_nickname() << std::endl;
 	std::cout << "Phone number: " << phone->Contact_[i_idx].get_phone() << std::endl;
+	std::cout << "Darkest Secret: " << phone->Contact_[i_idx].get_secret() << std::endl;
+	std::cout << std::endl;
 }

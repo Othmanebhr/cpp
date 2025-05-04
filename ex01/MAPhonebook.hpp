@@ -1,9 +1,13 @@
 #ifndef M_A_PHONEBOOK_HPP
 #define M_A_PHONEBOOK_HPP
 
-#include <cctype>
 #include <iostream>
+#include <cctype>
+#include <string>
+#include <unistd.h>
+#include <cstdlib>
 #include <iomanip>
+#include <cstdio>
 
 class Contact
 {
@@ -24,18 +28,20 @@ class Contact
 	std::string	get_last_name(void);
 	std::string	get_nickname(void);
 	std::string	get_phone(void);
+	std::string	get_secret(void);
 };
 
 class Phonebook
 {
 	private:
-	int		idx_;
+	int			idx_;
 	
 	public:
 	Contact		Contact_[8];
 	void		set_idx();
 	bool		icr_idx();
 	int			get_idx();
+	int			count;
 };
 
 void	get_input(std::string *input);

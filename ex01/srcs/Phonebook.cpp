@@ -3,6 +3,7 @@
 void	Phonebook::set_idx(void)
 {
 	idx_ = 0;
+	count = 1;
 }
 
 bool	Phonebook::icr_idx(void)

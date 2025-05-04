@@ -12,7 +12,10 @@ void	get_input(std::string *input)
 {
 	std::getline(std::cin, *input);
 	if (*input == "EXIT")
+	{
+		system("clear");
 		exit(0);
+	}
 }
 
 int	main(int ac, char **av)
@@ -27,6 +30,7 @@ int	main(int ac, char **av)
 	}
 	system("clear");
 	phone.set_idx();
+	phone.count = 0;
 	first_aff();
 	std::cout << std::endl;
 	while (true)
@@ -41,5 +45,6 @@ int	main(int ac, char **av)
 		else if (input == "SEARCH")
 			search_contact(&phone, &input);
 	}
+	system("clear");
 	return 0;
 }

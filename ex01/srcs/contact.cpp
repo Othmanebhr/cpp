@@ -1,25 +1,43 @@
 #include "../MAPhonebook.hpp"
 
-bool	Contact::set_first_name(std::string *str, int checker) //////////digit
+bool	Contact::set_first_name(std::string *str, int checker)
 {
 	first_name_ = *str;
 	if (!str || first_name_.length() < 2)
 	{
 		if (checker == 0)
-			std::cout << "Please set a valid first_name, at least 2 letters" << std::endl;
+			std::cout << "Please set a valid first_name, at least 2 letters, no space and no digits" << std::endl;
 		return false;
+	}
+	for (size_t i = 0; i < str->length() ; i++)
+	{
+		if (!std::isalpha((*str)[i]))
+		{
+			if (checker == 0)
+				std::cout << "Please set a valid first_name, at least 2 letters, no space and no digits" << std::endl;
+			return false;
+		}
 	}
 	return true;
 }
 
-bool	Contact::set_last_name(std::string *str, int checker) ///////digit
+bool	Contact::set_last_name(std::string *str, int checker)
 {
 	last_name_ = *str;
 	if (!str || last_name_.length() < 2)
 	{
 		if (checker == 0)
-			std::cout << "Please set a valid last_name, at least 2 letters" << std::endl;
+			std::cout << "Please set a valid last_name, at least 2 letters, no space and no digits" << std::endl;
 		return false;
+	}
+	for (size_t i = 0; i < str->length() ; i++)
+	{
+		if (!std::isalpha((*str)[i]))
+		{
+			if (checker == 0)
+				std::cout << "Please set a valid last_name, at least 2 letters, no space and no digits" << std::endl;
+			return false;
+		}
 	}
 	return true;
 }
@@ -83,4 +101,9 @@ std::string	Contact::get_nickname(void)
 std::string	Contact::get_phone(void)
 {
 	return phone_number_;
+}
+
+std::string	Contact::get_secret(void)
+{
+	return Darkest_secret_;
 }
