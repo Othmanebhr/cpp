@@ -44,10 +44,10 @@ class Phonebook
 	int			count;
 };
 
-void	get_input(std::string *input);
+bool	get_input(std::string *input);
 
-void	add_contact(Phonebook *phone, std::string *input);
+bool	search_contact(Phonebook *phone, std::string *input);
 
-void	search_contact(Phonebook *phone, std::string *input);
+bool	add_contact(Phonebook *phone, std::string *input);
 
 #endif

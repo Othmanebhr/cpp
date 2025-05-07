@@ -29,7 +29,7 @@ static void print_full_contact(Phonebook *phone)
 	std::cout << "---------------------------------------------" << std::endl;
 }
 
-void search_contact(Phonebook *phone, std::string *input)
+bool search_contact(Phonebook *phone, std::string *input)
 {
 	print_full_contact(phone);
 	std::cout << "Please put the index you are serching for:" << std::endl;
@@ -37,7 +37,8 @@ void search_contact(Phonebook *phone, std::string *input)
 	std::string check;
 	while (true)
 	{
-		get_input(input);
+		if (!get_input(input))
+			return false ;
 		check = *input;
 		int		checker = 0;
 		for (size_t i = 0; i < check.length(); i++)
@@ -67,4 +68,5 @@ void search_contact(Phonebook *phone, std::string *input)
 	std::cout << "Phone number: " << phone->Contact_[i_idx].get_phone() << std::endl;
 	std::cout << "Darkest Secret: " << phone->Contact_[i_idx].get_secret() << std::endl;
 	std::cout << std::endl;
+	return true;
 }
