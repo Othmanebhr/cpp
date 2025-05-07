@@ -4,8 +4,8 @@ SRC = main.cpp \
 	randomChump.cpp \
 	Zombie.cpp 
 CXX = c++
-CXXFLAGS = -Wall -Werror -Wextra -std+c++98
-OBJ = $(SRC:.cpp =.o)
+CXXFLAGS = -Wall -Werror -Wextra -std=c++98
+OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
 
@@ -16,10 +16,10 @@ $(NAME): $(OBJ)
 		$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -r $(OBJ)
+	rm -f $(OBJ)
 
 fclean: clean
-	rm -r $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
 
