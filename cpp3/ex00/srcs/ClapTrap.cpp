@@ -41,37 +41,44 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& rhs)
 void    ClapTrap::attack(const std::string& target)
 {
     if (_HitPoint <= 0)
-        std::cout << "Claptrap: " << _name << "is dead." << std::endl;
+    {
+        std::cout << "Claptrap: " << _name << " is dead." << std::endl;
+        return ;
+    }
     if (_EnergyPoint > 0)
     {
         std::cout << "Claptrap: " << _name << " attacks " << target << 
         " causing " << _AttackDammage << " point of dammage." << std::endl;
+        _EnergyPoint--;
     }
     else
         std::cout << "Claptrap: " << _name << 
-        " have no energy left, he can't attack" << std::endl;
-    _EnergyPoint--;
+        " have no energy left, he can't attack." << std::endl;
 }
 
 void    ClapTrap::beRepaired(unsigned int amount)
 {
     if (_HitPoint <= 0)
-        std::cout << "Claptrap: " << _name << "is dead." << std::endl;
+    {
+        std::cout << "Claptrap: " << _name << " is dead." << std::endl;
+        return ;
+    }
     if (_EnergyPoint > 0)
     {
         std::cout << "Claptrap: " << _name << " use heal, " << amount << 
         " HP have been regains!" << std::endl;
+        _HitPoint += amount;
+        _EnergyPoint--;
     }
     else
         std::cout << "Claptrap: " << _name << 
         " have no energy left, he can't heal itself" << std::endl;
-    _EnergyPoint--;
 }
 
 void    ClapTrap::takedamage(unsigned int amount)
 {
     if (_HitPoint <= 0)
-        std::cout << "Claptrap: " << _name << "is already dead." << std::endl;
+        std::cout << "Claptrap: " << _name << " is already dead." << std::endl;
     else
     {
         _HitPoint -= amount;
@@ -83,3 +90,15 @@ void    ClapTrap::takedamage(unsigned int amount)
             << " dammage, he has now " << _HitPoint << "HP left." << std::endl;  
     }    
 }
+
+//geter
+unsigned int    ClapTrap::getAttackDammage() { return _AttackDammage; }
+unsigned int    ClapTrap::getEnergyPoint() { return _EnergyPoint; }
+unsigned int    ClapTrap::getHitPoint() { return _HitPoint; }
+std::string     ClapTrap::getName() { return _name; }
+
+//setter
+void    ClapTrap::setName(std::string name) { _name = name; }
+void    ClapTrap::setHitPoint(unsigned int HP) { _HitPoint = HP; }
+void    ClapTrap::setEnergyPoint(unsigned int EP) { _EnergyPoint = EP; }
+void    ClapTrap::setAttackDammage(unsigned int AD) { _AttackDammage = AD; }
