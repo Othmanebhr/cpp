@@ -9,12 +9,17 @@ class ClapTrap
     ClapTrap();
     ClapTrap(std::string name);
     ClapTrap(const ClapTrap& cpy);
-    ClapTrap& operator=(ClapTrap& rhs);
+    ClapTrap& operator=(const ClapTrap& rhs);
     ~ClapTrap();
 
     void    attack(const std::string& target);
     void    takedamage(unsigned int amount);
     void    beRepaired(unsigned int amount);
+
+    // std::string     getName();
+    // unsigned int    getHitPoint();
+    // unsigned int    getEnergyPoint();
+    // unsigned int    getAttackDammage();
 
     private:
     std::string _name;
