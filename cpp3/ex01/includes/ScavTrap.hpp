@@ -14,17 +14,17 @@ class ScavTrap
 
 	void	guardGate();
 
-	std::string		ScavTrap::getName();
-	bool			ScavTrap::getGuarMode();
-	unsigned int	ScavTrap::getHitPoint();
-	unsigned int	ScavTrap::getEnergyPoint();
-	unsigned int	ScavTrap::getAttackDammage();
+	std::string		getName();
+	bool			getGuarMode();
+	unsigned int	getHitPoint();
+	unsigned int	getEnergyPoint();
+	unsigned int	getAttackDammage();
 
-	void			ScavTrap::setName(std::string name);
-	void			ScavTrap::setGuarMode(bool GM);
-	void			ScavTrap::setHitPoint(unsigned int HP);
-	void			ScavTrap::setEnergyPoint(unsigned int EP);
-	void			ScavTrap::setAttackDammage(unsigned int AD);
+	void			setName(std::string name);
+	void			setGuarMode(bool GM);
+	void			setHitPoint(unsigned int HP);
+	void			setEnergyPoint(unsigned int EP);
+	void			setAttackDammage(unsigned int AD);
 
 	private:
 	std::string		_name;
