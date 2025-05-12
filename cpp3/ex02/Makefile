@@ -1,8 +1,9 @@
-NAME = ClapTrapV2
+NAME = FragTrap
 SRC = srcs/
 FILES = $(SRC)main.cpp \
 		$(SRC)ClapTrap.cpp \
-		$(SRC)ScavTrap.cpp
+		$(SRC)ScavTrap.cpp \
+		$(SRC)FragTrap.cpp
 CXX = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98
 OBJ = $(FILES:.cpp=.o)

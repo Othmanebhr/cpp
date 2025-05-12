@@ -1,4 +1,4 @@
-NAME = ClapTrapV2
+NAME = ScavTrap
 SRC = srcs/
 FILES = $(SRC)main.cpp \
 		$(SRC)ClapTrap.cpp \

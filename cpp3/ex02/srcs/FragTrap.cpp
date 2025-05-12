@@ -28,5 +28,9 @@ FragTrap& FragTrap::operator=(const FragTrap& rhs)
 	return *this;
 }
 
-FragTrap::~FragTrap() { std::cout << "ScavTrap: Destructor called." << std::endl; }
+FragTrap::~FragTrap() { std::cout << "FragTrap: Destructor called." << std::endl; }
 
+void	FragTrap::highFivesGuys()
+{
+	std::cout << this->getName() << " Say: Who want a Highfive?" << std::endl;
+}
