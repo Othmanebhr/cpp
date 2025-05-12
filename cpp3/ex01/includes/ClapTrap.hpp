@@ -10,7 +10,7 @@ class ClapTrap
 	ClapTrap(std::string name);
 	ClapTrap(const ClapTrap& cpy);
 	ClapTrap& operator=(const ClapTrap& rhs);
-	~ClapTrap();
+	virtual ~ClapTrap();
 
 	void	attack(const std::string& target);
 	void	takedamage(unsigned int amount);
