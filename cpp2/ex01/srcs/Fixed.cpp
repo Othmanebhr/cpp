@@ -63,3 +63,5 @@ std::ostream& operator<<(std::ostream& os, const Fixed& fixed)
 	os << fixed.toFloat();
 	return os;
 }
+
+/*Decalage de bits de 8 pour creer un nouvel octect pour le le float*/
