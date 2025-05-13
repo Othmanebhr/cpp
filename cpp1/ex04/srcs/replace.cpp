@@ -6,10 +6,10 @@ replace::~replace(){}
 
 std::string replace::get_find() const
 {
-    return this->_find;
+	return this->_find;
 }
 
 std::string replace::get_replace() const
 {
-    return this->_replace;
+	return this->_replace;
 }
