@@ -19,7 +19,6 @@ class ScavTrap : public ClapTrap
 	void	setGuarMode(bool GM);
 
 	private:
-
 	bool	_GuardMode;
 };
 

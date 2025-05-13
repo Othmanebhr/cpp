@@ -26,7 +26,7 @@ class ClapTrap
 	void	setEnergyPoint(unsigned int EP);
 	void	setAttackDammage(unsigned int AD);
 
-	private:
+	protected: // achanger cpp3
 	std::string		_name;
 	unsigned int	_HitPoint;
 	unsigned int	_EnergyPoint;
