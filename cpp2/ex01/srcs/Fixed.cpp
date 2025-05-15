@@ -64,4 +64,4 @@ std::ostream& operator<<(std::ostream& os, const Fixed& fixed)
 	return os;
 }
 
-/*Decalage de bits de 8 pour creer un nouvel octect pour le le float*/
+/*Decalage de bits de 8 pour creer un nouvel octect pour le float*/
