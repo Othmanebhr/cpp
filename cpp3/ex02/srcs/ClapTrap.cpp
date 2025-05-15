@@ -88,17 +88,17 @@ void	ClapTrap::takedamage(unsigned int amount)
 		else
 			std::cout << "Claptrap: " << _name << " has taken " << amount 
 			<< " dammage, he has now " << _HitPoint << "HP left." << std::endl;  
-	}    
+	}
 }
 
-//geter
-unsigned int	ClapTrap::getAttackDammage() { return _AttackDammage; }
-unsigned int	ClapTrap::getEnergyPoint() { return _EnergyPoint; }
-unsigned int	ClapTrap::getHitPoint() { return _HitPoint; }
-std::string		ClapTrap::getName() { return _name; }
+// //geter
+// unsigned int	ClapTrap::getAttackDammage() { return _AttackDammage; }
+// unsigned int	ClapTrap::getEnergyPoint() { return _EnergyPoint; }
+// unsigned int	ClapTrap::getHitPoint() { return _HitPoint; }
+// std::string		ClapTrap::getName() { return _name; }
 
-//setter
-void	ClapTrap::setName(std::string name) { _name = name; }
-void	ClapTrap::setHitPoint(unsigned int HP) { _HitPoint = HP; }
-void	ClapTrap::setEnergyPoint(unsigned int EP) { _EnergyPoint = EP; }
-void	ClapTrap::setAttackDammage(unsigned int AD) { _AttackDammage = AD; }
+// //setter
+// void	ClapTrap::setName(std::string name) { _name = name; }
+// void	ClapTrap::setHitPoint(unsigned int HP) { _HitPoint = HP; }
+// void	ClapTrap::setEnergyPoint(unsigned int EP) { _EnergyPoint = EP; }
+// void	ClapTrap::setAttackDammage(unsigned int AD) { _AttackDammage = AD; }

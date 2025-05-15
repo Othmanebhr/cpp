@@ -32,6 +32,5 @@ int main()
 	Yanis.highFivesGuys();
 	std::cout << std::endl;
 
-
 	return 0;
 }

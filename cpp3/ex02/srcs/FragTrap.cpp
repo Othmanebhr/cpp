@@ -2,17 +2,17 @@
 
 FragTrap::FragTrap() : ClapTrap()
 {
-	this->setHitPoint(100);
-	this->setEnergyPoint(100);
-	this->setAttackDammage(30);
+	this->_HitPoint = 100;
+	this->_EnergyPoint = 100;
+	this->_AttackDammage = 30;
 	std::cout << "FragTrap: default constructor called." << std::endl;
 }
 
 FragTrap::FragTrap(std::string name) : ClapTrap(name)
 {
-	this->setHitPoint(100);
-	this->setEnergyPoint(100);
-	this->setAttackDammage(30);
+	this->_HitPoint = 100;
+	this->_EnergyPoint = 100;
+	this->_AttackDammage = 30;
 	std::cout << "FragTrap: Parameterized constructor called." << std::endl;
 }
 
@@ -32,5 +32,5 @@ FragTrap::~FragTrap() { std::cout << "FragTrap: Destructor called." << std::endl
 
 void	FragTrap::highFivesGuys()
 {
-	std::cout << this->getName() << " Say: Who want a Highfive?" << std::endl;
+	std::cout << this->_name << " Say: Who want a Highfive?" << std::endl;
 }

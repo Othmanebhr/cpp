@@ -16,17 +16,17 @@ class ClapTrap
 	void	takedamage(unsigned int amount);
 	void	beRepaired(unsigned int amount);
 
-	std::string		getName();
-	unsigned int	getHitPoint();
-	unsigned int	getEnergyPoint();
-	unsigned int	getAttackDammage();
+	// std::string		getName();
+	// unsigned int	getHitPoint();
+	// unsigned int	getEnergyPoint();
+	// unsigned int	getAttackDammage();
 
-	void	setName(std::string name);
-	void	setHitPoint(unsigned int HP);
-	void	setEnergyPoint(unsigned int EP);
-	void	setAttackDammage(unsigned int AD);
+	// void	setName(std::string name);
+	// void	setHitPoint(unsigned int HP);
+	// void	setEnergyPoint(unsigned int EP);
+	// void	setAttackDammage(unsigned int AD);
 
-	private:
+	protected:
 	std::string		_name;
 	unsigned int	_HitPoint;
 	unsigned int	_EnergyPoint;

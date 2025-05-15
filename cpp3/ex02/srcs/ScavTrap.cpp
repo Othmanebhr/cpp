@@ -2,17 +2,17 @@
 
 ScavTrap::ScavTrap() : ClapTrap(), _GuardMode(false)
 {
-	this->setHitPoint(100);
-	this->setEnergyPoint(50);
-	this->setAttackDammage(20);
+	this->_HitPoint = 100;
+	this->_EnergyPoint = 50;
+	this->_AttackDammage = 20;
 	std::cout << "Scavtrap: Default constructor called." << std::endl;
 }
 
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name), _GuardMode(false)
 {
-	this->setHitPoint(100);
-	this->setEnergyPoint(50);
-	this->setAttackDammage(20);
+	this->_HitPoint = 100;
+	this->_EnergyPoint = 50;
+	this->_AttackDammage = 20;
 	std::cout << "Scavtrap: Parameterized constructor called." << std::endl;
 }
 
@@ -40,17 +40,17 @@ void	ScavTrap::setGuarMode(bool GM)
 	if (_GuardMode == GM)
 	{
 		if (GM)
-			std::cout << "Scavtrap: " << this->getName() << " is already in guarmode." << std::endl;
+			std::cout << "Scavtrap: " << this->_name << " is already in guarmode." << std::endl;
 		else
-			std::cout << "Scavtrap: " << this->getName() << " is already chillin." << std::endl;
+			std::cout << "Scavtrap: " << this->_name << " is already chillin." << std::endl;
 	}
 	else
 	{
 		_GuardMode = GM;
 		if (GM)
-			std::cout << "Scavtrap: " << this->getName() << " is now in guarmode." << std::endl;
+			std::cout << "Scavtrap: " << this->_name << " is now in guarmode." << std::endl;
 		else
-			std::cout << "Scavtrap: " << this->getName() << " is now chillin." << std::endl;
+			std::cout << "Scavtrap: " << this->_name << " is now chillin." << std::endl;
 	}
 }
 
