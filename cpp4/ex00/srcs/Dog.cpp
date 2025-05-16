@@ -16,7 +16,7 @@ Dog& Dog::operator=(const Dog& rhs)
 {
 	std::cout << "Dog: Assignation operator called." << std::endl;
 	if (this != &rhs)
-		*this = rhs;
+		this->_type = rhs._type;
 	return *this;
 }
 

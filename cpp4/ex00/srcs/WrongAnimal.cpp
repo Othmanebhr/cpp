@@ -14,7 +14,7 @@ WrongAnimal::WrongAnimal(const WrongAnimal& cpy)
 WrongAnimal& WrongAnimal::operator=(const WrongAnimal& rhs)
 {
 	if (this != &rhs)
-		*this = rhs;
+		this->_type = rhs._type;
 	return *this;
 }
 

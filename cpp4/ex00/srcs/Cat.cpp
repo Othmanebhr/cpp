@@ -12,7 +12,7 @@ Cat& Cat::operator=(const Cat& rhs)
 {
 	std::cout << "Cat: Assignation operator called." << std::endl;
 	if (this != &rhs)
-		*this = rhs;
+		this->_type = rhs._type;
 	return *this;
 }
 
