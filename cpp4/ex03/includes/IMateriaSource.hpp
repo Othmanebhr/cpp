@@ -9,10 +9,11 @@ class IMateriaSource
 {
 	public:
 	virtual ~IMateriaSource() {}
-	virtual void learMateria(AMateria *) = 0;
-	virtual void createMateria(std::string const & type) = 0;
+	virtual void learnMateria(AMateria *) = 0;
+	virtual AMateria* createMateria(std::string const & type) = 0;
 
 	private:
+
 };
 
 #endif
