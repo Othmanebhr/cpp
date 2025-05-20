@@ -29,14 +29,14 @@ Brain::~Brain()
 
 std::string	Brain::getIdea(size_t i)
 {
-	if (i > 100)
+	if (i >= 100)
 		return "There is only 100 ideas!";
 	return this->_ideas[i];
 }
 
 void	Brain::setIdeas(size_t i, std::string idea)
 {
-	if (i > 100)
+	if (i >= 100)
 		std::cout << "It can only be 100 ideas!" << std::endl;
 	else
 	{
