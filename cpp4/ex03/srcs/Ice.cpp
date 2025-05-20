@@ -1,4 +1,4 @@
-#include "Ice.hpp"
+#include "../includes/Global.hpp"
 
 Ice::Ice() : AMateria("ice") {}
 

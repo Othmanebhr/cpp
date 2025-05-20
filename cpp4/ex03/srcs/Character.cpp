@@ -1,4 +1,4 @@
-#include "../includes/Character.hpp"
+#include "../includes/Global.hpp"
 
 Character::Character(std::string name) : _name(name)
 {
@@ -78,3 +78,10 @@ void Character::use(int idx, ICharacter& target)
 }
 
 std::string const & Character::getName() const { return _name; }
+
+AMateria	*Character::getInventory(int idx) const
+{
+	if (idx >= 0 && idx < 4)
+		return _inventory[idx];
+	return NULL;
+}

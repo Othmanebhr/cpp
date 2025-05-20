@@ -1,5 +1,5 @@
 #ifndef CURE_HPP
-#define Cure_HPP
+#define CURE_HPP
 
 #include "AMateria.hpp"
 

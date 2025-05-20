@@ -1,4 +1,4 @@
-#include "../includes/MateriaSource.hpp"
+#include "../includes/Global.hpp"
 
 MateriaSource::MateriaSource()
 {
@@ -55,6 +55,8 @@ void	MateriaSource::learnMateria(AMateria *Materia)
 			return ;
 		}
 	}
+	if (Materia)
+		delete Materia;//pour le test main
 }
 
 AMateria *MateriaSource::createMateria(const std::string& type)
