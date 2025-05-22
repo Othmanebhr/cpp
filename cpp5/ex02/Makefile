@@ -1,8 +1,12 @@
-NAME = ex01
+NAME = ex02
 SRC = srcs/
 FILES = $(SRC)main.cpp \
 		$(SRC)Bureaucrat.cpp \
-		$(SRC)Form.cpp
+		$(SRC)AForm.cpp \
+		$(SRC)PresidentialPardonForm.cpp \
+		$(SRC)RobotomyRequestForm.cpp \
+		$(SRC)ShrubberyCreationForm.cpp 
+
 CXX = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98
 OBJ = $(FILES:.cpp=.o)

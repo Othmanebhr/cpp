@@ -56,7 +56,7 @@ const char *Bureaucrat::GradeTooLowException::what() const throw()
 	return "Grade is too low, Grade 150 is Minimum!";
 }
 
-void	Bureaucrat::signForm(Form& F)
+void	Bureaucrat::signForm(AForm& F)
 {
 	try
 	{
@@ -64,10 +64,22 @@ void	Bureaucrat::signForm(Form& F)
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << _name << " couldn't sign " << F.getName() << " because:" << e.what() << std::endl;
+		std::cerr << _name << " couldn't sign " << F.getName() << " because: " << e.what() << std::endl;
 		return ;
 	}
 	std::cout << _name << " signed " << F.getName() << "!" << std::endl;
+}
+
+void	Bureaucrat::executeForm(AForm const & Form)
+{
+	try
+	{
+		Form.execute(*this);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << _name << " coundn't execute " << Form.getName() << " because: " << e.what() << std::endl;
+	}
 }
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& Bureaucrat)
