@@ -2,7 +2,7 @@
 
 int main()
 {
-	Data Sana(99, "Elle est vraiment grave claquee c'est grave");
+	Data Sana(99, "Elle lave Maxime en code c'est trop grave");
 
 	/*Data originale*/
 	std::cout << "Données originales:" << std::endl;
