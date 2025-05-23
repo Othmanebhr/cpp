@@ -1,7 +1,7 @@
-NAME = convert
+NAME = serializer
 SRC = srcs/
 FILES = $(SRC)main.cpp \
-		$(SRC)ScalarConverter.cpp
+		$(SRC)Serializer.cpp
 
 CXX = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98
