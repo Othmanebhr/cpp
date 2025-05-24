@@ -167,10 +167,10 @@ void ScalarConverter::convFromFloat(float value)
 
 void ScalarConverter::convFromDouble(double value)
 {
-		/*char*/
-	if (value >= 32 && value >= 126)
+	/*char*/
+	if (value >= 32 && value <= 126)
 		std::cout << "char: '" << static_cast<char>(value) << "'" << std::endl;
-	else if (value >= 0 & value <= 127)
+	else if (value >= 0 && value <= 127)
 		std::cout << "char: non displayable" << std::endl;
 	else
 		std::cout << "char: impossible" << std::endl;
@@ -190,16 +190,16 @@ void ScalarConverter::convFromDouble(double value)
 	else
 	{
 		std::cout << "float: '" << static_cast<float>(value) << "f'" << std::endl;
-		std::cout << "double: '" << value << std::endl;
+		std::cout << "double: '" << value << "'" << std::endl;
 	}
 }
 
 void ScalarConverter::handleLiteralValue(std::string& literal)
 {
-	if (literal[literal.length() - 1] == 'f')
-		literal = literal.substr(0, literal.length() - 1);
+	// if (literal.length() > 0 && literal[literal.length() - 1] == 'f')
+	// 	literal = literal.substr(0, literal.length() - 1);
 	std::cout << "char: impossible" << std::endl;
 	std::cout << "int: impossible" << std::endl;
-	std::cout << "float: '" << literal << "f'" << std::endl;
+	std::cout << "float: '" << literal << "'" << std::endl;
 	std::cout << "double: '" << literal << "'" << std::endl;
 }
