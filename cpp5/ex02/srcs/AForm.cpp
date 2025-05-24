@@ -1,7 +1,17 @@
 #include "../includes/AForm.hpp"
 
 AForm::AForm(std::string name, unsigned int min_exec, unsigned int min_sign)
- : _name(name), _isSigned(false), _executed(false) ,_gradeSign(min_sign), _gradeExec(min_exec) {}
+ : _name(name), _isSigned(false), _executed(false) ,_gradeSign(min_sign), _gradeExec(min_exec)
+{
+	if (min_sign < 1)
+		throw GradeTooHighException();
+	else if (min_sign > 150)
+		throw GradeTooLowException();
+	if (min_exec < 1)
+		throw GradeTooHighException();
+	else if (min_exec > 150)
+		throw GradeTooLowException();
+}
 
 AForm::AForm(const AForm& cpy)
  : _name(cpy._name), _isSigned(cpy._isSigned), _executed(false), _gradeSign(cpy._gradeSign), _gradeExec(cpy._gradeExec) {}

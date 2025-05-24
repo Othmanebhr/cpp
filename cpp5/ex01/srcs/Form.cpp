@@ -1,6 +1,16 @@
 #include "../includes/Form.hpp"
 
-Form::Form(std::string name, unsigned int min_exec, unsigned int min_sign) : _name(name), _isSigned(false), _gradeSign(min_sign), _gradeExec(min_exec) {}
+Form::Form(std::string name, unsigned int min_exec, unsigned int min_sign) : _name(name), _isSigned(false), _gradeSign(min_sign), _gradeExec(min_exec) 
+{
+	if (min_sign < 1)
+		throw GradeTooHighException();
+	else if (min_sign > 150)
+		throw GradeTooLowException();
+	if (min_exec < 1)
+		throw GradeTooHighException();
+	else if (min_exec > 150)
+		throw GradeTooLowException();
+}
 
 Form::Form(const Form& cpy) : _name(cpy._name), _isSigned(cpy._isSigned), _gradeSign(cpy._gradeSign), _gradeExec(cpy._gradeExec) {}
 

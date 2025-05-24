@@ -4,7 +4,9 @@ int main()
 {
 	try
 	{
-		Bureaucrat Bob("Bob", 6);
+		Bureaucrat Bob("Bob", 1);
+		std::cout << Bob << std::endl; 
+		Bob.gradeDown();
 		std::cout << Bob << std::endl;
 	}
 	catch (const std::exception& e)
@@ -16,6 +18,8 @@ int main()
 	{
 		Bureaucrat Maxime("Maxime", 150);
 		std::cout << Maxime << std::endl;
+		Maxime.gradeUp();
+		std::cout << Maxime << std::endl;
 	}
 	catch (const std::exception& e)
 	{
@@ -24,11 +28,25 @@ int main()
 
 	try
 	{
-		Bureaucrat Miqdad("Miq", 1);
+		Bureaucrat Othmane("Othmane", 1);
+		std::cout << Othmane << std::endl;
+		Othmane.gradeUp();
+		std::cout << Othmane << std::endl;
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << "err: Othmane: ";
+		std::cerr << e.what() << std::endl;
+	}
+
+	try
+	{
+		Bureaucrat Miqdad("Miq", 0);
 		std::cout << Miqdad << std::endl;
 	}
 	catch (const std::exception& e)
 	{
+		std::cout << "err: Miqdad: ";
 		std::cerr << e.what() << std::endl;
 	}
 
@@ -39,7 +57,7 @@ int main()
 	}
 	catch(const std::exception& e)
 	{
-		std::cout << "Yanis: ";
+		std::cout << "err: Yanis: ";
 		std::cerr << e.what() << std::endl;
 	}
 	return 0;
