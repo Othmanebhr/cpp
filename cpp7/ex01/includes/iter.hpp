@@ -6,7 +6,7 @@
 #include <cctype>
 
 template <typename T>
-void iter(T *array, size_t len, void (*f)(T &))
+void iter(T *array, size_t len, void (*f)( T &))
 {
 	if (!f || !array)
 		return ;
