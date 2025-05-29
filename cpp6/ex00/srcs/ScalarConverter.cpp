@@ -7,6 +7,18 @@ ScalarConverter::~ScalarConverter() {}
 
 void	ScalarConverter::convert(const std::string& literal)
 {
+	std::string max_int = literal.substr(0, 10);
+	if (max_int.size() == 10 && max_int > "2147483647")
+	{
+		std::cout << "Invalid input" << std::endl;
+		return ;
+	}
+	std::string min_int = literal.substr(0, 11);
+	if (min_int.size() == 11 && min_int > "-2147483648")
+	{
+		std::cout << "Invalid input" << std::endl;
+		return ;
+	}
 	if (isPseudoLiteral(literal))
 	{
 		std::string lit = literal;
