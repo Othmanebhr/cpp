@@ -1,6 +1,6 @@
 NAME = Array
 SRC = srcs/
-FILES = $(SRC)main.cpp
+FILES = $(SRC)main.cpp 
 
 CXX = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98
