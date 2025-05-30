@@ -2,6 +2,8 @@
 
 #include <iostream>
 #include <exception>
+#include <algorithm>//find
+#include <vector>
 
 class NotFind : public std::exception
 {
