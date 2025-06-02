@@ -2,6 +2,8 @@
 
 int main()
 {
+	std::srand(static_cast<unsigned int>(std::time(NULL)));
+
 	std::cout << "--------Test Subject--------" << std::endl;
 	Span sp = Span(5);
 	sp.addNumber(6);
@@ -18,6 +20,7 @@ int main()
 
 	try
 	{
+		std::cout << "test Basique (8):" << std::endl;
 		Span test(8);
 		for (size_t i = 0; i < 8; i++)
 			test.addNumber(i);
@@ -36,9 +39,51 @@ int main()
 
 	try
 	{
+		std::cout << "test Basique (qui foire):" << std::endl;
 		Span test(0);
 		std::cout << "Shortest Span = " << test.shortestSpan() << std::endl;
 		std::cout << "Longest Span = " << test.longestSpan() << std::endl;
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << std::endl;
+		std::cout << e.what() << std::endl;
+	}
+
+	std::cout << std::endl;
+	std::cout << "----------------------------" << std::endl;
+	std::cout << std::endl;
+
+	try
+	{
+		std::cout << "test addRange:" << std::endl;
+		Span Bigspan(10000);
+
+		Bigspan.addRange(10000);
+
+		std::cout << "Shortest Span = " << Bigspan.shortestSpan() << std::endl;
+		std::cout << "Longest Span = " << Bigspan.longestSpan() << std::endl;
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << std::endl;
+		std::cout << e.what() << std::endl;
+	}
+
+	std::cout << std::endl;
+	std::cout << "----------------------------" << std::endl;
+	std::cout << std::endl;
+
+	try
+	{
+		std::vector<int> random;
+		for (size_t i = 0; i < 10000; i++)
+			random.push_back(rand() % 10000);
+
+		Span Bigspan(10000);
+		Bigspan.addRange2(random.begin(), random.end());
+		std::cout << "Shortest Span = " << Bigspan.shortestSpan() << std::endl;
+		std::cout << "Longest Span = " << Bigspan.longestSpan() << std::endl;
 	}
 	catch (const std::exception& e)
 	{

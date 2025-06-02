@@ -4,6 +4,9 @@
 #include <exception>
 #include <vector>
 #include <algorithm>
+#include <iterator>
+#include <ctime>
+#include <cstdlib>
 
 class Span
 {
@@ -16,6 +19,11 @@ class Span
 	void addNumber(int nb);
 	int shortestSpan();
 	int longestSpan();
+
+	void addRange(size_t nb);
+
+	template<typename Iterator>
+	void addRange2(Iterator beg, Iterator end);
 
 	class TooManyElem : public std::exception
 	{
@@ -32,3 +40,13 @@ class Span
 	std::vector<int> _vec;
 
 };
+
+template<typename Iterator>
+void Span::addRange2(Iterator beg, Iterator end)
+{
+	size_t dist = std::distance(beg, end);
+	if (dist > _vec.capacity() - _vec.size())
+		throw TooManyElem();
+
+	_vec.insert(_vec.end(), beg, end);
+}

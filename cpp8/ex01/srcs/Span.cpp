@@ -54,6 +54,16 @@ int Span::longestSpan()
 	return tmp[tmp.size() - 1] - tmp[0];
 }
 
+void Span::addRange(size_t nb)
+{
+	if (nb > this->_vec.capacity())
+		throw TooManyElem();
+	if (nb == 0)
+		throw NotEnoughElem();
+	for (size_t i = 0; i < nb; i++)
+		_vec.push_back(rand() % 10000);
+}
+
 const char *Span::TooManyElem::what() const throw()
 {
 	return "Too many elements.";
