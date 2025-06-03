@@ -76,6 +76,7 @@ int main()
 
 	try
 	{
+		std::cout << "test addRange2 (Subject demand?):" << std::endl;
 		std::vector<int> random;
 		for (size_t i = 0; i < 10000; i++)
 			random.push_back(rand() % 10000);
