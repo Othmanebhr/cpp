@@ -1,4 +1,4 @@
-NAME = Mutant
+NAME = btc
 SRC = srcs/
 FILES = $(SRC)main.cpp
 
