@@ -3,6 +3,8 @@
 #include <iostream>
 #include <string>
 #include <exception>
+#include <fstream>
+#include <map>
 
 class Bitcoin
 {
@@ -10,18 +12,16 @@ class Bitcoin
 	/*Canonical form*/
 	Bitcoin() {};
 	Bitcoin(const Bitcoin& cpy) { *this = cpy; };
-	Bitcoin& operator=(const Bitcoin& rhs)
+	Bitcoin& operator=(const Bitcoin& rhs)//// MAP A AJOUTE
 	{
-		if (this != &rhs)
-		{
-			this->_line = rhs._line; 
-		}
+		if (this != &rhs) {}
 		return *this;
 	}
 	~Bitcoin() {};
 
 	/*Members function*/
-	bool parseLine();
+	static bool parseLine(std::ifstream input_file);
+	bool open_get_input(char *data);
 
 	/*Exception*/
 	class NotPositive : public std::exception
@@ -42,7 +42,15 @@ class Bitcoin
 			}
 	};
 
+	class ErrorFile : public std::exception
+	{
+		public:
+			virtual const char *what() const throw()
+			{
+				return "Error: Bad input";
+			}
+	};
+
 	private:
-	std::string _line;
-	bool		_isValid;
+	std::map<std::string, float> _map;
 };
