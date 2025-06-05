@@ -20,8 +20,13 @@ class Bitcoin
 	~Bitcoin() {};
 
 	/*Members function*/
-	static bool parseLine(std::ifstream input_file);
+	bool parseLine(std::ifstream input_file);
 	bool open_get_input(char *data);
+	static void trim_date(std::string date);
+	static float trim_value(std::string value);
+
+	/*Setter, Getter*/
+	std::map<std::string, float> getMap();
 
 	/*Exception*/
 	class NotPositive : public std::exception
@@ -49,6 +54,15 @@ class Bitcoin
 			{
 				return "Error: Bad input";
 			}
+	};
+
+	class TooBig : public std::exception
+	{
+		public:
+		virtual const char *what() const throw()
+		{
+			return "Eroor: nb too big.";
+		}
 	};
 
 	private:
