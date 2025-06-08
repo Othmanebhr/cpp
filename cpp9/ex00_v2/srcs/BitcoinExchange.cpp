@@ -1,4 +1,5 @@
 #include "../includes/BitcoinExchange.hpp"
+#define ERR_BI "Error: Bad input ==> "
 
 void Bitcoin::trim_date()
 {
@@ -7,30 +8,21 @@ void Bitcoin::trim_date()
 	//isalpha (+ajout de check si '-' > 2)
 
 	if (d[4] != '-' || d[7] != '-')
-		throw ErrorFile();
+		std::cerr << ERR_BI << _date << std::endl;
 	std::string tmp = _date.substr(0, '-');
 	d = tmp.c_str();
 	if (std::atoi(d) > 2022 || std::atoi(d) < 2009)
-	{
-		std::cerr << _date << "==>" << std::endl;
-		throw TooBig();
-	}
+		std::cerr << ERR_BI << _date << std::endl;
 	size_t minus_pos = _date.find("-");
 	size_t second_minus_pos = _date.find("-", minus_pos + 1);
 	tmp = _date.substr(minus_pos + 1, second_minus_pos - 1);
 	d = tmp.c_str();
 	if (std::atoi(d) > 12 || std::atoi(d) < 1)
-	{
-		std::cerr << _date << "==>" << std::endl; // Affchage a revoir (dans le mauvais ordre)
-		throw TooBig();
-	}
+		std::cerr << ERR_BI << _date << std::endl;
 	tmp = _date.substr(second_minus_pos + 1, ' '); // Ne pas oublier l'espace a la fin
 	d = tmp.c_str();
 	if (std::atoi(d) > 31 || std::atoi(d) < 1)
-	{
-		std::cerr << _date << "==>" << std::endl;
-		throw TooBig();
-	}
+		std::cerr << ERR_BI << _date << std::endl;
 	_map[_date] = _nb;
 	//Appel de l'algo ici pour chaque element
 }
@@ -43,7 +35,10 @@ float Bitcoin::trim_value(std::string value)
 		return false;
 	size_t start = 1;
 	if (val[start] == '-')
-		throw NotPositive();
+	{
+		std::cerr << "Error: not a positive number." << std::endl;
+		return -1;
+	}
 	bool hasDecimal = false;
 	for (size_t i = start; i < value.length() - 1; i++)
 	{
@@ -52,12 +47,17 @@ float Bitcoin::trim_value(std::string value)
 		else if (val[i] == '.' && !hasDecimal && i != start)
 			hasDecimal = true;
 		else
-			throw NotNumber();
+		{
+			std::cerr << "Error: not a number." << std::endl;
+			return -1;
+		}
 	}
 	float _nb = std::atof(val + start);
 	if (_nb > 1000)
-		throw TooBig();
-
+	{
+		std::cerr << "Eroor: nb too big." << std::endl;
+		return -1;
+	}
 	return _nb;
 }
 
@@ -74,20 +74,14 @@ bool Bitcoin::parseLine(std::ifstream input_file, Bitcoin Data)
 	}
 	while (std::getline(input_file, line))
 	{
-		try
-		{
-			size_t pipe_pos = line.find("|");
-			if (pipe_pos == std::string::npos)
-				throw ErrorFile();
-			_date = line.substr(0, pipe_pos); //a voir si cela prends le pipe
-			std::string value = line.substr(pipe_pos + 1);
-			_nb = Data.trim_value(value);
+		size_t pipe_pos = line.find("|");
+		if (pipe_pos == std::string::npos)
+			std::cerr << ERR_BI << line << std::endl;
+		_date = line.substr(0, pipe_pos); //a voir si cela prends le pipe
+		std::string value = line.substr(pipe_pos + 1);
+		_nb = Data.trim_value(value);
+		if (_nb != -1)
 			Data.trim_date();
-		}
-		catch(const std::exception& e)
-		{
-			std::cerr << e.what() << std::endl;
-		}
 	}
 	return true;
 }
@@ -98,14 +92,9 @@ bool Bitcoin::open_get_input(char *data)
 	Bitcoin Data;
 
 	input_file.open(data);
-	try
+	if (!input_file.is_open())
 	{
-		if (!input_file.is_open())
-			throw ErrorFile();
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << std::endl;
+		std::cerr << "Error: cannot open file." << std::endl;
 		return false;
 	}
 	//OUVERTURE DU FILE DATA ET ANALYSE DANS TRIM__DATE
