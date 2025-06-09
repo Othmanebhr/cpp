@@ -2,7 +2,9 @@
 
 int main(int argc, char **av)
 {
-	if (argc != 2)
+
+	/* PARSE FICHIER .CSV*/
+	if (argc != 3)
 	{
 		std::cerr << "Error: could not open file." << std::endl;
 		return 1;

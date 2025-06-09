@@ -6,6 +6,8 @@
 #include <fstream>
 #include <map>
 #include <limits>
+#include <unistd.h>
+#include <cstdlib>
 
 class Bitcoin
 {
@@ -26,7 +28,7 @@ class Bitcoin
 	~Bitcoin() {};
 
 	/*Members function*/
-	bool parseLine(std::ifstream& input_file, Bitcoin& Data);
+	void parseLine(std::ifstream& input_file, Bitcoin& Data);
 
 	void open_get_input(char *input, char *data);
 	bool validateDate();

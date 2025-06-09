@@ -91,19 +91,19 @@ float Bitcoin::trim_value(std::string& value)
 	return nb;
 }
 
-bool Bitcoin::parseLine(std::ifstream& input_file, Bitcoin& input)
+void Bitcoin::parseLine(std::ifstream& input_file, Bitcoin& input)
 {
 	std::string line;
 	std::getline(input_file, line);
 	if (line.empty())
 	{
 		std::cout << "Empty file." << std::endl;
-		return false;
+		return ;
 	}
 	if (line != "date | value")
 	{
 		std::cerr << "Bad input" << std::endl;
-		return false;
+		return ;
 	}
 	while (std::getline(input_file, line))
 	{
@@ -124,7 +124,7 @@ bool Bitcoin::parseLine(std::ifstream& input_file, Bitcoin& input)
 		searchAndPrintExchange(date, value);
 		_map[date] = value;
 	}
-	return true;
+	// return true;
 }
 
 bool Bitcoin::fill_data(std::ifstream& data_file) // Change to reference
@@ -161,7 +161,7 @@ bool Bitcoin::fill_data(std::ifstream& data_file) // Change to reference
 	return true;
 }
 
-void Bitcoin::open_get_input(char *input_file_name, char *data_file_name)
+void Bitcoin::open_get_input(char *data_file_name, char *input_file_name)
 {
 	std::ifstream input_file;
 	std::ifstream data_file;
@@ -185,7 +185,7 @@ void Bitcoin::open_get_input(char *input_file_name, char *data_file_name)
 		data_file.close();
 		return ;
 	}
-	bool result = parseLine(input_file, *this);
+	parseLine(input_file, *this);
 	input_file.close();
 	data_file.close();
 	return ;

@@ -1,6 +1,7 @@
 NAME = btc
 SRC = srcs/
-FILES = $(SRC)main.cpp
+FILES = $(SRC)main.cpp \
+		$(SRC)BitcoinExchange.cpp
 
 CXX = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98
