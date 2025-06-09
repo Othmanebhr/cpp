@@ -13,24 +13,35 @@ class Bitcoin
 	/*Canonical form*/
 	Bitcoin() {};
 	Bitcoin(const Bitcoin& cpy) { *this = cpy; };
-	Bitcoin& operator=(const Bitcoin& rhs)//// MAP A AJOUTE
+	Bitcoin& operator=(const Bitcoin& rhs)
 	{
-		if (this != &rhs) {}
+		if (this != &rhs) {
+			this->_map = rhs._map;
+			this->_data = rhs._data;
+			this->_date = rhs._date;
+			this->_nb = rhs._nb;
+		}
 		return *this;
 	}
 	~Bitcoin() {};
 
 	/*Members function*/
-	bool parseLine(std::ifstream input_file, Bitcoin Data);
-	bool open_get_input(char *data);
-	void trim_date();
-	float trim_value(std::string value);
+	bool parseLine(std::ifstream& input_file, Bitcoin& Data);
+
+	void open_get_input(char *input, char *data);
+	bool validateDate();
+	float trim_value(std::string& value);
+
+	void searchAndPrintExchange(const std::string& date, float value);
+
+	bool fill_data(std::ifstream& data_file); // Add & for reference
 
 	/*Setter, Getter*/
-	std::map<std::string, float> getMap();
+	std::map<std::string, float> getMap() const { return _map; }
 
 	private:
 	std::map<std::string, float> _map;
+	std::map<std::string, float> _data;
 	std::string _date;
 	float _nb;
 };
