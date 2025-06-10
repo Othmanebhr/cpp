@@ -1,6 +1,7 @@
 #include "../includes/BitcoinExchange.hpp"
 #define ERR_BI "Error: Bad input ==> "
 #define ERR_DATA "Error: Bad data file."
+#define ERR_FILE "Error: Bad format: '.csv' is required."
 
 void Bitcoin::searchAndPrintExchange(const std::string& date, float value)
 {
@@ -22,34 +23,38 @@ bool Bitcoin::validateDate()
 {
 	const char *d = _date.c_str();
 
-	// Vérifier le format général de la date (YYYY-MM-DD)
-	if (d[4] != '-' || d[7] != '-') {
+	// format (YYYY-MM-DD)
+	if (d[4] != '-' || d[7] != '-')
+	{
 		std::cerr << ERR_BI << _date << std::endl;
 		return false;
 	}
 
-	// Vérifier l'année (entre 2009 et 2022)
+	// année (entre 2009 et 2022)
 	std::string tmp = _date.substr(0, 4);
 	d = tmp.c_str();
-	if (std::atoi(d) > 2022 || std::atoi(d) < 2009) {
+	if (std::atoi(d) > 2022 || std::atoi(d) < 2009)
+	{
 		std::cerr << ERR_BI << _date << std::endl;
 		return false;
 	}
 
-	// Vérifier le mois (entre 1 et 12)
+	// mois (entre 1 et 12)
 	size_t minus_pos = _date.find("-");
 	size_t second_minus_pos = _date.find("-", minus_pos + 1);
 	tmp = _date.substr(minus_pos + 1, second_minus_pos - minus_pos - 1);
 	d = tmp.c_str();
-	if (std::atoi(d) > 12 || std::atoi(d) < 1) {
+	if (std::atoi(d) > 12 || std::atoi(d) < 1)
+	{
 		std::cerr << ERR_BI << _date << std::endl;
 		return false;
 	}
 
-	// Vérifier le jour (entre 1 et 31)
+	//jour (entre 1 et 31)
 	tmp = _date.substr(second_minus_pos + 1);
 	d = tmp.c_str();
-	if (std::atoi(d) > 31 || std::atoi(d) < 1) {
+	if (std::atoi(d) > 31 || std::atoi(d) < 1)
+	{
 		std::cerr << ERR_BI << _date << std::endl;
 		return false;
 	}
@@ -85,7 +90,7 @@ float Bitcoin::trim_value(std::string& value)
 	float nb = std::atof(val + start); // Change _nb to local variable
 	if (nb > 1000)
 	{
-		std::cerr << "Error: nb too big." << std::endl; // Fix typo in "Error"
+		std::cerr << "Error: too large a number." << std::endl; // Fix typo in "Error"
 		return -1;
 	}
 	return nb;
@@ -161,17 +166,41 @@ bool Bitcoin::fill_data(std::ifstream& data_file) // Change to reference
 	return true;
 }
 
+static bool check_file_name(char *data_file_name)
+{
+	if (!data_file_name)
+	{
+		std::cerr << ERR_FILE << std::endl;
+		return false;
+	}
+	std::string tmp = data_file_name;
+	size_t pos = tmp.find(".");
+	if (pos == std::string::npos)
+	{
+		std::cerr << ERR_FILE << std::endl;
+		return false;
+	}
+	tmp = tmp.substr(pos);
+	if (tmp != ".csv")
+	{
+		std::cerr << ERR_FILE << std::endl;
+		return false;
+	}
+	return true;
+}
+
 void Bitcoin::open_get_input(char *data_file_name, char *input_file_name)
 {
+	if (!check_file_name(data_file_name))
+		return;
 	std::ifstream input_file;
-	std::ifstream data_file;
-
 	input_file.open(input_file_name);
 	if (!input_file.is_open())
 	{
 		std::cerr << "Error: cannot open input_file." << std::endl;
 		return ;
 	}
+	std::ifstream data_file;
 	data_file.open(data_file_name);
 	if (!data_file.is_open())
 	{
