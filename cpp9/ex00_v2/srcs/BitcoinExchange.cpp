@@ -132,7 +132,7 @@ void Bitcoin::parseLine(std::ifstream& input_file, Bitcoin& input)
 	// return true;
 }
 
-bool Bitcoin::fill_data(std::ifstream& data_file) // Change to reference
+bool Bitcoin::fill_data(std::ifstream& data_file)
 {
 	std::string line;
 
