@@ -1,7 +1,7 @@
 NAME = RPN
 SRC = srcs/
 FILES = $(SRC)main.cpp \
-		$(SRC)BitcoinExchange.cpp
+		$(SRC)RPN.cpp
 
 CXX = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98

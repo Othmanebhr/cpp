@@ -14,7 +14,7 @@ class RPN
 		if (this != & rhs)
 		{
 			this->_contain = rhs._contain;
-			this->_calcul = _calcul;
+			this->_calcul = rhs._calcul;
 		}
 		return *this;
 	}
@@ -22,7 +22,7 @@ class RPN
 
 	/*member fuction*/
 	bool calculate();
-	bool is_between(char c);
+	// bool is_between(char c);
 
 	private:
 	std::stack<int> _contain;

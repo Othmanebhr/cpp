@@ -10,7 +10,7 @@ empty() : vérifier si la pile est vide
 size() : obtenir le nombre d'éléments
 */
 
-bool RPN::is_between(char c)
+bool is_between(char c)
 {
 	if (std::isdigit(c))
 	{
@@ -32,9 +32,57 @@ bool RPN::calculate()
 			return false;
 		}
 	}
-	int save = -1;
 	for (size_t i = 0; i < _calcul.size(); i++)
 	{
-		
+		char c = _calcul[i];
+		if (c == ' ' || c == '\t')
+			continue;
+		if (is_between(c))
+		{
+			int nb = c - '0';
+			_contain.push(nb);
+		}
+		else
+		{
+			if (_contain.size() < 2)
+			{
+				std::cout << ERR_IF << std::endl;
+				return false;
+			}
+			int b = _contain.top();
+			_contain.pop();
+			int a = _contain.top();
+			_contain.pop();
+			switch (c)
+			{
+				case '+':
+					_contain.push(a + b);
+					break;
+				case '-':
+					_contain.push(a - b);
+					break;
+				case '*':
+					_contain.push(a * b);
+					break;
+				case '/':
+					if (b == 0)
+					{
+						std::cerr << "Error: cannot divide by 0." << std::endl;
+						return false; 
+					}
+					_contain.push(a / b);
+					break;
+				default:
+					std::cout << ERR_IF << std::endl;
+					return false;
+			}
+		}
 	}
+	if (_contain.size() != 1)
+	{
+		std::cerr << ERR_IF << std::endl;
+		return false;
+	}
+	std::cout << _contain.top() << std::endl;
+	return true;
 }
