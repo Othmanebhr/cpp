@@ -8,5 +8,5 @@ int main(int ac, char **av)
 		return 1;
 	}
 	PmergeMe PmergeMe;
-	PmergeMe.GetInput(av[1]);
+	PmergeMe.getInput(ac, av);
 }
