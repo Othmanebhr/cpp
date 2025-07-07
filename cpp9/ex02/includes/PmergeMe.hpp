@@ -25,13 +25,12 @@ class PmergeMe
 
 	void sortVector();
 	void sortDeque();
-	static void mergeInsertSortVector(std::vector<int>& vec, int left, int right);
-	static void mergeInsertSortDeque(std::deque<int>& deque, int left, int right);
+	static void fordJohnsonSortVector(std::vector<int>& vec);
+	static void fordJohnsonSortDeque(std::deque<int>& deque);
 	
-	std::vector<int> generateJabobsthalsequence(int n);
+	static std::vector<int> generateJabobsthalsequence(int n);
 
-	template<typename T>
-	void binaryInsertion(T& container, int value, int end);
+	static void binaryInsertion(std::vector<int>& container, int value, int end);
 
 
 	private:

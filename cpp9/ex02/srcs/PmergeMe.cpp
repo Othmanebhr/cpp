@@ -31,7 +31,7 @@ std::vector<int> PmergeMe::generateJabobsthalsequence(int n)
 
 	if (n == 0)
 		return JacobSthal;//a voir si on return autre chose a cause des comportement indefini
-	JacobSthal.push_back(1); //pourquoi pas 0
+	JacobSthal.push_back(1);
 	if (n == 1)
 		return JacobSthal;
 	JacobSthal.push_back(3);
@@ -45,15 +45,14 @@ std::vector<int> PmergeMe::generateJabobsthalsequence(int n)
 	return JacobSthal;
 }
 
-template <typename T>
-void PmergeMe::binaryInsertion(T& container, int value, int end)
+void PmergeMe::binaryInsertion(std::vector<int>& container, int value, int end)
 {
 	int left = 0, right = end;
 
 	while (left < right)
 	{
-		int mid = left + (right - left) / 2 // (Right + left) / 2 Potentiel overflow
-		if (container[mid] < left)
+		int mid = left + (right - left) / 2; // (Right + left) / 2 Potentiel overflow
+		if (container[mid] < value)
 			left = mid + 1;
 		else
 			right = mid;
@@ -72,9 +71,75 @@ void PmergeMe::sortVector()
 	if (_vector.empty())
 		return ;
 	clock_t start = clock();
-	mergeInsertSortVector(_vector, 0, _vector.size() - 1);
+	fordJohnsonSortVector(_vector);
 	clock_t end = clock();
 	_vectorTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000;
+}
+
+void PmergeMe::fordJohnsonSortVector(std::vector<int>& vec)
+{
+	if (vec.size() <= 1)
+		return ;
+
+	std::vector<std::pair<int, int> > pairs;
+	int alone = -1;
+	bool hasAlone = false;
+	for (size_t i = 0; i < vec.size(); i += 2)
+	{
+		if (i + 1 < vec.size())
+		{
+			if (vec[i] > vec[i + 1])
+				pairs.push_back(std::make_pair(vec[i], vec[i + 1]));
+			else
+				pairs.push_back(std::make_pair(vec[i + 1], vec[i]));
+		}
+		else
+		{
+			alone = vec[i];
+			hasAlone = true;
+		}
+	}
+
+	std::vector<int> bigChain;
+	std::vector<int> smallChain;
+	for (size_t i = 0; i < pairs.size(); i++)
+	{
+		bigChain.push_back(pairs[i].first);
+		smallChain.push_back(pairs[i].second);
+	}
+
+	if (bigChain.size() > 1)
+		fordJohnsonSortVector(bigChain);
+
+	vec.clear();
+
+	if (!smallChain.empty())
+	{
+		vec.push_back(smallChain[0]);
+		for (size_t i = 0; i < bigChain.size(); i++)\
+			vec.push_back(bigChain[i]);
+		std::vector<int> JacobSthal = generateJabobsthalsequence(smallChain.size());
+		std::vector<bool> inserted(smallChain.size(), false);//constructeur std::vector<type> vec(taille, valeur par defaults)
+		inserted[0] = true;
+		for (size_t j = 0; j < JacobSthal.size(); j++)
+		{
+			size_t jsIndex = JacobSthal[j];
+			if (jsIndex <= smallChain.size() && !inserted[jsIndex - 1])
+			{
+				binaryInsertion(vec, smallChain[jsIndex - 1], vec.size());
+				inserted[jsIndex - 1] = true;
+			}
+		}
+		for (size_t i = 1; i < smallChain.size(); i++)
+		{
+			if (!inserted[i])
+				binaryInsertion(vec, smallChain[i], vec.size());
+		}
+		if (smallChain.empty() && !bigChain.empty())
+			vec = bigChain;
+		if (hasAlone)
+			binaryInsertion(vec, alone, vec.size());
+	}
 }
 
 void PmergeMe::sortDeque()
@@ -82,20 +147,12 @@ void PmergeMe::sortDeque()
 	if (_deque.empty())
 		return ;
 	clock_t start = clock();
-	mergeInsertSortDeque(_deque, 0, _deque.size() - 1);
+	fordJohnsonSortDeque(_deque);
 	clock_t end = clock();
 	_dequeTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000;
 }
 
-
-
-void PmergeMe::mergeInsertSortVector(std::vector<int>& vector, int left, int right)
-{
-	if (left >= right)
-		return ;
-}
-
-void PmergeMe::mergeInsertSortDeque(std::deque<int>& deque, int left, int right)
+void PmergeMe::fordJohnsonSortDeque(std::deque<int>& deque)
 {
 
 }
@@ -120,6 +177,7 @@ void PmergeMe::displayResults()
 }
 
 /*Parsing*/
+
 bool PmergeMe::parseInput(std::string input)
 {
 	std::stringstream flux_input(input);
