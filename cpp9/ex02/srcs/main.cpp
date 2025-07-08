@@ -2,11 +2,14 @@
 
 int main(int ac, char **av)
 {
-	if (ac != 2)
+	if (ac < 2)
 	{
-		std::cout << "Error: usage: ./PmergeMe 'nb, nb,...'";
+		std::cout << "Usage: " << av[0] << " [positive integers]" << std::endl;
 		return 1;
 	}
-	PmergeMe PmergeMe;
-	PmergeMe.getInput(ac, av);
+	PmergeMe sorter;
+	if (!sorter.getInput(ac, av))
+		return 1;
+	sorter.run();
+	return 0;
 }

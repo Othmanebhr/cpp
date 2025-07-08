@@ -17,21 +17,23 @@ class PmergeMe
 	~PmergeMe() {};
 
 	bool getInput(int ac, char **av);
-	
 	bool parseInput(std::string input);
 
-	void printContainer(const std::string& name, bool before);
+	void run();
+
+	void printContainer(bool before);
 	void displayResults();
 
 	void sortVector();
 	void sortDeque();
-	static void fordJohnsonSortVector(std::vector<int>& vec);
-	static void fordJohnsonSortDeque(std::deque<int>& deque);
+	void fordJohnsonSortVector(std::vector<int>& vec);
+	void fordJohnsonSortDeque(std::deque<int>& deque);
 	
-	static std::vector<int> generateJabobsthalsequence(int n);
+	std::vector<int> generateJabobsthalsequence(int n);
+	std::deque<int> generateJabobsthalsequenceD(int n);
 
-	static void binaryInsertion(std::vector<int>& container, int value, int end);
-
+	void binaryInsertion(std::vector<int>& container, int value, int end);
+	void binaryInsertionD(std::deque<int>& container, int value, int end);
 
 	private:
 	std::vector<int> _vector;
