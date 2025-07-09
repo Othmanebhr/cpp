@@ -1,10 +1,8 @@
 #include "../includes/BitcoinExchange.hpp"
 
-int main(int argc, char **av)
+int main(int ac, char **av)
 {
-
-	/* PARSE FICHIER .CSV*/
-	if (argc != 3)
+	if (ac != 3)
 	{
 		std::cerr << "Error: could not open file." << std::endl;
 		return 1;

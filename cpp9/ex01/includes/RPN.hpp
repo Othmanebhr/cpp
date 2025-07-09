@@ -22,7 +22,6 @@ class RPN
 
 	/*member fuction*/
 	bool calculate();
-	// bool is_between(char c);
 
 	private:
 	std::stack<int> _contain;

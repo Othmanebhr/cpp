@@ -10,7 +10,7 @@ empty() : vérifier si la pile est vide
 size() : obtenir le nombre d'éléments
 */
 
-bool is_between(char c)
+static bool is_nb_and_isBetween(char c)
 {
 	if (std::isdigit(c))
 	{
@@ -26,7 +26,7 @@ bool RPN::calculate()
 	{
 		if (_calcul[i] != '+' && _calcul[i] != '-' && _calcul[i] != '/' && _calcul[i] != '*' && _calcul[i] != ' ' && _calcul[i] != '\t')
 		{
-			if (is_between(_calcul[i]))
+			if (is_nb_and_isBetween(_calcul[i]))
 				continue;
 			std::cerr << ERR_IF << std::endl;
 			return false;
@@ -37,7 +37,7 @@ bool RPN::calculate()
 		char c = _calcul[i];
 		if (c == ' ' || c == '\t')
 			continue;
-		if (is_between(c))
+		if (is_nb_and_isBetween(c))
 		{
 			int nb = c - '0';
 			_contain.push(nb);
