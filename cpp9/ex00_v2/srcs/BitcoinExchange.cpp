@@ -5,17 +5,23 @@
 
 void Bitcoin::searchAndPrintExchange(const std::string& date, float value)
 {
-	std::map<std::string, float>::iterator it = _data.upper_bound(date);
-	if (it == _data.begin() && it->first != date)
+	std::map<std::string, float>::iterator it = _data.lower_bound(date);
+
+	if (it != _data.end() && it->first == date)
+	{
+		float exchange_rate = it->second;
+		float result = value * exchange_rate;
+		std::cout << date << " => " << value << " = " << result << std::endl;
+		return;
+	}
+	if (it == _data.begin())
 	{
 		std::cerr << "Error: no data available for date " << date << std::endl;
 		return;
 	}
-	if (it == _data.end() || it->first != date)
-		--it;
+	--it;
 	float exchange_rate = it->second;
 	float result = value * exchange_rate;
-
 	std::cout << date << " => " << value << " = " << result << std::endl;
 }
 
@@ -23,14 +29,13 @@ bool Bitcoin::validateDate()
 {
 	const char *d = _date.c_str();
 
-	// format (YYYY-MM-DD)
+	//YYYY-MM-DD
 	if (d[4] != '-' || d[7] != '-')
 	{
 		std::cerr << ERR_BI << _date << std::endl;
 		return false;
 	}
-
-	// année (entre 2009 et 2022)
+	//année (entre 2009 et 2022)
 	std::string tmp = _date.substr(0, 4);
 	d = tmp.c_str();
 	if (std::atoi(d) > 2022 || std::atoi(d) < 2009)
@@ -38,8 +43,7 @@ bool Bitcoin::validateDate()
 		std::cerr << ERR_BI << _date << std::endl;
 		return false;
 	}
-
-	// mois (entre 1 et 12)
+	//mois (entre 1 et 12)
 	size_t minus_pos = _date.find("-");
 	size_t second_minus_pos = _date.find("-", minus_pos + 1);
 	tmp = _date.substr(minus_pos + 1, second_minus_pos - minus_pos - 1);
@@ -49,8 +53,7 @@ bool Bitcoin::validateDate()
 		std::cerr << ERR_BI << _date << std::endl;
 		return false;
 	}
-
-	//jour (entre 1 et 31)
+	// jour (entre 1 et 31)
 	tmp = _date.substr(second_minus_pos + 1);
 	d = tmp.c_str();
 	if (std::atoi(d) > 31 || std::atoi(d) < 1)
@@ -67,7 +70,7 @@ float Bitcoin::trim_value(std::string& value)
 	const char *val = value.c_str();
 
 	if (val[0] != ' ')
-		return -1; // This should return -1 or some other error indicator
+		return -1;
 	size_t start = 1;
 	if (val[start] == '-')
 	{
@@ -75,7 +78,7 @@ float Bitcoin::trim_value(std::string& value)
 		return -1;
 	}
 	bool hasDecimal = false;
-	for (size_t i = start; i < value.length(); i++) // Fix: removed -1
+	for (size_t i = start; i < value.length(); i++)
 	{
 		if (std::isdigit(val[i]))
 			continue;
@@ -87,10 +90,10 @@ float Bitcoin::trim_value(std::string& value)
 			return -1;
 		}
 	}
-	float nb = std::atof(val + start); // Change _nb to local variable
+	float nb = std::atof(val + start);
 	if (nb > 1000)
 	{
-		std::cerr << "Error: too large a number." << std::endl; // Fix typo in "Error"
+		std::cerr << "Error: too large a number." << std::endl;
 		return -1;
 	}
 	return nb;
@@ -99,12 +102,12 @@ float Bitcoin::trim_value(std::string& value)
 void Bitcoin::parseLine(std::ifstream& input_file, Bitcoin& input)
 {
 	std::string line;
-	std::getline(input_file, line);
-	if (line.empty())
+	if (input_file.peek() == std::ifstream::traits_type::eof())
 	{
 		std::cout << "Empty file." << std::endl;
 		return ;
 	}
+	std::getline(input_file, line);
 	if (line != "date | value")
 	{
 		std::cerr << "Bad input" << std::endl;
@@ -132,6 +135,61 @@ void Bitcoin::parseLine(std::ifstream& input_file, Bitcoin& input)
 	// return true;
 }
 
+static bool isValidNb(const std::string& str)
+{
+	if (str.empty())
+		return false;
+	size_t i = 0;
+	bool hasDecimal = false;
+	for (; i < str.size(); i++)
+	{
+		if (!std::isdigit(str[i]))
+		{
+			if ((hasDecimal == true && str[i] == '.') || str[i] != '.')
+				return false;
+		}
+		if (str[i] == '.')
+			hasDecimal = true;
+	}
+	return true;
+}
+
+static bool isValidDate(const std::string& date)
+{
+	const char *d = date.c_str();
+
+	if (date.length() != 10)
+		return false;
+	for (int i = 0; i < 10; i++)
+	{
+		if (i == 4 || i == 7)
+			continue;
+		if (!std::isdigit(d[i]))
+			return false;
+	}
+	//YYYY-MM-DD
+	if (d[4] != '-' || d[7] != '-')
+		return false;
+	//année (entre 2009 et 2022)
+	std::string tmp = date.substr(0, 4);
+	d = tmp.c_str();
+	if (std::atoi(d) > 2022 || std::atoi(d) < 2009)
+		return false;
+	//mois (entre 1 et 12)
+	size_t minus_pos = date.find("-");
+	size_t second_minus_pos = date.find("-", minus_pos + 1);
+	tmp = date.substr(minus_pos + 1, second_minus_pos - minus_pos - 1);
+	d = tmp.c_str();
+	if (std::atoi(d) > 12 || std::atoi(d) < 1)
+		return false;
+	// jour (entre 1 et 31)
+	tmp = date.substr(second_minus_pos + 1);
+	d = tmp.c_str();
+	if (std::atoi(d) > 31 || std::atoi(d) < 1)
+		return false;
+	return true;
+}
+
 bool Bitcoin::fill_data(std::ifstream& data_file)
 {
 	std::string line;
@@ -152,16 +210,13 @@ bool Bitcoin::fill_data(std::ifstream& data_file)
 		}
 		std::string before_com = line.substr(0, com_pos);
 		std::string after_com = line.substr(com_pos + 1);
-		try
-		{
-			float nb = std::atof(after_com.c_str());
-			_data[before_com] = nb;
-		}
-		catch (std::exception &e)
+		if (!isValidNb(after_com) || !isValidDate(before_com))
 		{
 			std::cerr << ERR_DATA << " Invalid format."<< std::endl;
 			return false;
 		}
+		float nb = std::atof(after_com.c_str());
+		_data[before_com] = nb;
 	}
 	return true;
 }

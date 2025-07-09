@@ -12,7 +12,6 @@
 class Bitcoin
 {
 	public:
-	/*Canonical form*/
 	Bitcoin() {};
 	Bitcoin(const Bitcoin& cpy) { *this = cpy; };
 	Bitcoin& operator=(const Bitcoin& rhs)
@@ -36,7 +35,7 @@ class Bitcoin
 
 	void searchAndPrintExchange(const std::string& date, float value);
 
-	bool fill_data(std::ifstream& data_file); // Add & for reference
+	bool fill_data(std::ifstream& data_file);
 
 	/*Setter, Getter*/
 	std::map<std::string, float> getMap() const { return _map; }
