@@ -11,7 +11,7 @@
 class PmergeMe
 {
 	public:
-	PmergeMe() : _vectorTime(0), _dequeTime(0) {}; //a voir si on init pas vector et deque;
+	PmergeMe() : _vectorTime(0), _dequeTime(0) {};
 	PmergeMe(const PmergeMe& cpy);
 	PmergeMe& operator=(const PmergeMe& rhs);
 	~PmergeMe() {};

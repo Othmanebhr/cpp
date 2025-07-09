@@ -294,7 +294,6 @@ bool PmergeMe::parseInput(std::string input)
 			ss >> nb;
 			if (ss.fail() || !ss.eof())
 				return false;
-				
 			if (nb < 0 || nb > INT_MAX)
 				return false;
 			_vector.push_back(nb);
