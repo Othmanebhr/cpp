@@ -15,7 +15,7 @@ Cette piscine m’a permis de découvrir les bases et les bonnes pratiques du la
 ---
 
 ## 📁 Structure du dépôt
-📦 cpp_piscine
+```📦 cpp_piscine
 ├── cpp00/ → Bases du langage (classes, std::string, iostream)
 ├── cpp01/ → Allocation mémoire, références, pointeurs, fichiers
 ├── cpp02/ → Orthodox Canonical Form, operator overloading
@@ -25,6 +25,7 @@ Cette piscine m’a permis de découvrir les bases et les bonnes pratiques du la
 ├── cpp06/ → Conversion de types, casting
 ├── cpp07/ → Templates et fonctions génériques
 └── cpp08/ → Containers, itérateurs et algorithmes STL
+```
 
 ---
 
@@ -38,7 +39,7 @@ Cette piscine m’a permis de découvrir les bases et les bonnes pratiques du la
 ---
 
 ## 🧱 Exemple de compilation
-```bash
+bash
 cd cpp01/ex03
 make
 ./program_name
