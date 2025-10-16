@@ -25,6 +25,7 @@ Cette piscine m’a permis de découvrir les bases et les bonnes pratiques du la
 ├── cpp06/ → Conversion de types, casting
 ├── cpp07/ → Templates et fonctions génériques
 └── cpp08/ → Containers, itérateurs et algorithmes STL
+└── cpp09/ → STL avancée, algorithmes, parsing et manipulation de données
 ```
 
 ---
